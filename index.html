@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechCorp Solutions</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="login-page" class="page">
+        <img src="logo.png" alt="TechCorp Solutions Logo" />
+        <h1>Login to TechCorp Solutions</h1>
+        <form id="login-form">
+          <input type="text" id="username" placeholder="Username" required />
+          <input type="password" id="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+          <p id="error-message"></p>
+        </form>
+        <p>
+          <strong>Default Admin Credentials:</strong> <br />
+          Username: admin <br />
+          Password: adminpass
+        </p>
+        <p>
+          <strong>Default Employee Credentials:</strong> <br />
+          Username: employee <br />
+          Password: employeepass
+        </p>
+      </div>
+
+      <div id="admin-dashboard" class="dashboard page">
+        <h1>Admin Dashboard</h1>
+        <button id="logout">Logout</button>
+        <div id="admin-content">
+          <h2>Manage Users</h2>
+          <div id="userlist"></div>
+          <div id="adduser">
+            <form id="adduser-form">
+              <input type="text" id="newusername" placeholder="Username" required />
+              <input type="password" id="newpassword" placeholder="Password" required />
+              <select id="newrole" required>
+                <option value="employee">Employee</option>
+                <option value="admin">Admin</option>
+              </select>
+              <button type="button" id="addBtn">Add User</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="employee-dashboard" class="dashboard page">
+        <h1>Employee Dashboard</h1>
+        <button id="logout">Logout</button>
+        <div id="employee-content">
+          <h2>Task List</h2>
+          <div id="tasklist"></div>
+          <div id="addtask">
+            <form id="addtask-form">
+              <input type="text" id="newtask" placeholder="Task" required />
+              <button type="button" id="addTaskBtn">Add Task</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const localDB = {
+        getUsers() {
+          return JSON.parse(localStorage.getItem('users')) || [
+            { username: "admin", password: "adminpass", role: "admin" },
+            { username: "employee", password: "employeepass", role: "employee" }
+          ];
+        },
+        setUsers(users) {
+          localStorage.setItem('users', JSON.stringify(users));
+        },
+        getTasks() {
+          return JSON.parse(localStorage.getItem('tasks')) || [];
+        },
+        setTasks(tasks) {
+          localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const loginPage = document.getElementById("login-page");
+        const adminDashboard = document.getElementById("admin-dashboard");
+        const employeeDashboard = document.getElementById("employee-dashboard");
+
+        adminDashboard.style.display = "none";
+        employeeDashboard.style.display = "none";
+
+        const loginForm = document.getElementById("login-form");
+        const errorMessage = document.getElementById("error-message");
+
+        function displayDashboard(user) {
+          loginPage.style.display = "none";
+          if (user.role === "admin") {
+            adminDashboard.style.display = "block";
+            loadUserList();
+          } else {
+            employeeDashboard.style.display = "block";
+            loadTaskList();
+          }
+        }
+
+        loginForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          const users = localDB.getUsers();
+          const user = users.find(
+            (u) => u.username === username && u.password === password
+          );
+
+          if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+            displayDashboard(user);
+          } else {
+            errorMessage.textContent = "Invalid username or password";
+          }
+        });
+
+        document.querySelectorAll("#logout").forEach((button) => {
+          button.addEventListener("click", () => {
+            localStorage.removeItem("user");
+            loginPage.style.display = "block";
+            adminDashboard.style.display = "none";
+            employeeDashboard.style.display = "none";
+          });
+        });
+
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+          displayDashboard(user);
+        } else {
+          loginPage.style.display = "block";
+          adminDashboard.style.display = "none";
+          employeeDashboard.style.display = "none";
+        }
+
+        const addBtn = document.getElementById("addBtn");
+        addBtn.addEventListener("click", () => {
+          const newusername = document.getElementById("newusername").value;
+          const newpassword = document.getElementById("newpassword").value;
+          const newrole = document.getElementById("newrole").value;
+
+          if (newusername && newpassword) {
+            const users = localDB.getUsers();
+            users.push({
+              username: newusername,
+              password: newpassword,
+              role: newrole
+            });
+            localDB.setUsers(users);
+
+            loadUserList();
+          }
+        });
+
+        function loadUserList() {
+          const userlist = document.getElementById("userlist");
+          const users = localDB.getUsers();
+          userlist.innerHTML = "";
+          users.forEach((user) => {
+            userlist.innerHTML += `<div>${user.username} - ${user.role}</div>`;
+          });
+        }
+
+        const addTaskBtn = document.getElementById("addTaskBtn");
+        addTaskBtn.addEventListener("click", () => {
+          const newtask = document.getElementById("newtask").value;
+
+          if (newtask) {
+            const tasks = localDB.getTasks();
+            tasks.push(newtask);
+            localDB.setTasks(tasks);
+
+            const tasklist = document.getElementById("tasklist");
+            tasklist.innerHTML += `<div>${newtask}</div>`;
+            document.getElementById("newtask").value = "";
+          }
+        });
+
+        function loadTaskList() {
+          const tasklist = document.getElementById("tasklist");
+          const tasks = localDB.getTasks();
+          tasklist.innerHTML = "";
+          tasks.forEach((task) => {
+            tasklist.innerHTML += `<div>${task}</div>`;
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
