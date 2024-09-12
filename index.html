@@ -13,7 +13,12 @@
         <h1>Login to TechCorp Solutions</h1>
         <form id="login-form">
           <input type="text" id="username" placeholder="Username" required />
-          <input type="password" id="password" placeholder="Password" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
           <button type="submit">Login</button>
           <p id="error-message"></p>
         </form>
@@ -37,8 +42,18 @@
           <div id="userlist"></div>
           <div id="adduser">
             <form id="adduser-form">
-              <input type="text" id="newusername" placeholder="Username" required />
-              <input type="password" id="newpassword" placeholder="Password" required />
+              <input
+                type="text"
+                id="newusername"
+                placeholder="Username"
+                required
+              />
+              <input
+                type="password"
+                id="newpassword"
+                placeholder="Password"
+                required
+              />
               <select id="newrole" required>
                 <option value="employee">Employee</option>
                 <option value="admin">Admin</option>
@@ -46,6 +61,23 @@
               <button type="button" id="addBtn">Add User</button>
             </form>
           </div>
+
+          <h2>Assign Tasks</h2>
+          <div id="assign-task">
+            <form id="assign-task-form">
+              <select id="assign-to" required></select>
+              <input
+                type="text"
+                id="new-task"
+                placeholder="New Task"
+                required
+              />
+              <button type="button" id="assignTaskBtn">Assign Task</button>
+            </form>
+          </div>
+
+          <h2>Assigned Tasks</h2>
+          <div id="assigned-tasks"></div>
         </div>
       </div>
 
@@ -55,12 +87,6 @@
         <div id="employee-content">
           <h2>Task List</h2>
           <div id="tasklist"></div>
-          <div id="addtask">
-            <form id="addtask-form">
-              <input type="text" id="newtask" placeholder="Task" required />
-              <button type="button" id="addTaskBtn">Add Task</button>
-            </form>
-          </div>
         </div>
       </div>
     </div>
@@ -68,20 +94,26 @@
     <script>
       const localDB = {
         getUsers() {
-          return JSON.parse(localStorage.getItem('users')) || [
-            { username: "admin", password: "adminpass", role: "admin" },
-            { username: "employee", password: "employeepass", role: "employee" }
-          ];
+          return (
+            JSON.parse(localStorage.getItem("users")) || [
+              { username: "admin", password: "adminpass", role: "admin" },
+              {
+                username: "employee",
+                password: "employeepass",
+                role: "employee",
+              },
+            ]
+          );
         },
         setUsers(users) {
-          localStorage.setItem('users', JSON.stringify(users));
+          localStorage.setItem("users", JSON.stringify(users));
         },
         getTasks() {
-          return JSON.parse(localStorage.getItem('tasks')) || [];
+          return JSON.parse(localStorage.getItem("tasks")) || [];
         },
         setTasks(tasks) {
-          localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+        },
       };
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -100,9 +132,11 @@
           if (user.role === "admin") {
             adminDashboard.style.display = "block";
             loadUserList();
+            loadAssignTaskOptions();
+            loadAssignedTasks();
           } else {
             employeeDashboard.style.display = "block";
-            loadTaskList();
+            loadTaskList(user.username);
           }
         }
 
@@ -133,13 +167,18 @@
           });
         });
 
-        const user = JSON.parse(localStorage.getItem("user"));
-        if (user) {
-          displayDashboard(user);
-        } else {
-          loginPage.style.display = "block";
-          adminDashboard.style.display = "none";
-          employeeDashboard.style.display = "none";
+        function loadUserList() {
+          const userlist = document.getElementById("userlist");
+          const users = localDB.getUsers();
+          userlist.innerHTML = "";
+          users.forEach((user) => {
+            userlist.innerHTML += `
+            <div class="user-card">
+              <img src="profile-placeholder.jpg" alt="${user.username}" />
+              <div>${user.username} - ${user.role}</div>
+            </div>
+          `;
+          });
         }
 
         const addBtn = document.getElementById("addBtn");
@@ -153,46 +192,90 @@
             users.push({
               username: newusername,
               password: newpassword,
-              role: newrole
+              role: newrole,
             });
             localDB.setUsers(users);
 
             loadUserList();
+            loadAssignTaskOptions();
           }
         });
 
-        function loadUserList() {
-          const userlist = document.getElementById("userlist");
-          const users = localDB.getUsers();
-          userlist.innerHTML = "";
-          users.forEach((user) => {
-            userlist.innerHTML += `<div>${user.username} - ${user.role}</div>`;
-          });
-        }
+        const assignTaskBtn = document.getElementById("assignTaskBtn");
+        assignTaskBtn.addEventListener("click", () => {
+          const assignedTo = document.getElementById("assign-to").value;
+          const newTask = document.getElementById("new-task").value;
 
-        const addTaskBtn = document.getElementById("addTaskBtn");
-        addTaskBtn.addEventListener("click", () => {
-          const newtask = document.getElementById("newtask").value;
-
-          if (newtask) {
+          if (assignedTo && newTask) {
             const tasks = localDB.getTasks();
-            tasks.push(newtask);
+            tasks.push({ task: newTask, assignedTo, completed: false });
             localDB.setTasks(tasks);
 
-            const tasklist = document.getElementById("tasklist");
-            tasklist.innerHTML += `<div>${newtask}</div>`;
-            document.getElementById("newtask").value = "";
+            loadAssignedTasks();
+            document.getElementById("new-task").value = "";
           }
         });
 
-        function loadTaskList() {
-          const tasklist = document.getElementById("tasklist");
+        function loadAssignTaskOptions() {
+          const assignTo = document.getElementById("assign-to");
+          const users = localDB.getUsers().filter((u) => u.role === "employee");
+          assignTo.innerHTML = users
+            .map(
+              (user) =>
+                `<option value="${user.username}">${user.username}</option>`
+            )
+            .join("");
+        }
+
+        function loadAssignedTasks() {
+          const assignedTasks = document.getElementById("assigned-tasks");
           const tasks = localDB.getTasks();
-          tasklist.innerHTML = "";
-          tasks.forEach((task) => {
-            tasklist.innerHTML += `<div>${task}</div>`;
+          assignedTasks.innerHTML = "";
+          tasks.forEach((task, index) => {
+            if (!task.completed) {
+              assignedTasks.innerHTML += `
+              <div>
+                ${task.task} (Assigned to: ${task.assignedTo})
+                <button onclick="removeTask(${index})">Remove</button>
+              </div>
+            `;
+            }
           });
         }
+
+        function loadTaskList(username) {
+          const tasklist = document.getElementById("tasklist");
+          const tasks = localDB
+            .getTasks()
+            .filter((task) => task.assignedTo === username && !task.completed);
+          tasklist.innerHTML = "";
+          tasks.forEach((task, index) => {
+            tasklist.innerHTML += `
+            <div>
+              ${task.task}
+              <button onclick="
+                if (confirm('Are you sure you want to complete this task?')) {
+                  completeTask(${index});
+                }
+              ">Complete</button>
+            </div>
+          `;
+          });
+        }
+
+        window.completeTask = function (index) {
+          const tasks = localDB.getTasks();
+          tasks[index].completed = true;
+          localDB.setTasks(tasks);
+          loadTaskList(JSON.parse(localStorage.getItem("user")).username);
+        };
+
+        window.removeTask = function (index) {
+          const tasks = localDB.getTasks();
+          tasks.splice(index, 1);
+          localDB.setTasks(tasks);
+          loadAssignedTasks();
+        };
       });
     </script>
   </body>
