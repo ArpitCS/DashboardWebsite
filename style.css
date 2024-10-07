@@ -14,7 +14,6 @@ body {
 
 img {
   max-width: 150px;
-  /* margin-bottom: 20px; */
 }
 
 h1,
@@ -98,4 +97,64 @@ button:hover {
 
 #assigned-tasks div {
   margin-bottom: 10px;
+}
+
+/* New Styles for Dashboard Layout */
+.dashboard-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow content to wrap for smaller screens */
+}
+
+.admin-section {
+  flex: 1; /* Equal width for each section */
+  min-width: 250px; /* Minimum width for responsiveness */
+  margin: 10px; /* Margin between sections */
+  background-color: #f9f9f9; /* Light background for sections */
+  padding: 15px; /* Padding inside sections */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
+}
+
+#employee-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align content to the start */
+}
+
+#tasklist {
+  width: 100%; /* Full width for task list */
+  background-color: #f4f4f4; /* Light background */
+  padding: 10px; /* Padding for task list */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
+}
+
+/* Adjust button styles to look better in the dashboard */
+button {
+  width: 100%; /* Full width buttons */
+}
+
+#userlist div,
+#tasklist div {
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #e9ecef; /* Background for user/task items */
+  border-radius: 5px; /* Rounded corners */
+}
+
+#login-page {
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  color: white !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+
+#login-page h1 {
+  color: white;
 }

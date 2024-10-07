@@ -37,58 +37,51 @@
       <div id="admin-dashboard" class="dashboard page">
         <h1>Admin Dashboard</h1>
         <button id="logout">Logout</button>
-        <div id="admin-content">
-          <h2>Manage Users</h2>
-          <div id="userlist"></div>
-          <div id="adduser">
-            <form id="adduser-form">
-              <input
-                type="text"
-                id="newusername"
-                placeholder="Username"
-                required
-              />
-              <input
-                type="password"
-                id="newpassword"
-                placeholder="Password"
-                required
-              />
-              <select id="newrole" required>
-                <option value="employee">Employee</option>
-                <option value="admin">Admin</option>
-              </select>
-              <button type="button" id="addBtn">Add User</button>
-            </form>
+        <div id="admin-content" class="dashboard-content">
+          <div class="admin-section">
+            <h2>Manage Users</h2>
+            <div id="userlist"></div>
+            <div id="adduser">
+              <form id="adduser-form">
+                <input type="text" id="newusername" placeholder="Username" required />
+                <input type="password" id="newpassword" placeholder="Password" required />
+                <select id="newrole" required>
+                  <option value="employee">Employee</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <button type="button" id="addBtn">Add User</button>
+              </form>
+            </div>
           </div>
-
-          <h2>Assign Tasks</h2>
-          <div id="assign-task">
-            <form id="assign-task-form">
-              <select id="assign-to" required></select>
-              <input
-                type="text"
-                id="new-task"
-                placeholder="New Task"
-                required
-              />
-              <button type="button" id="assignTaskBtn">Assign Task</button>
-            </form>
+      
+          <div class="admin-section">
+            <h2>Assign Tasks</h2>
+            <div id="assign-task">
+              <form id="assign-task-form">
+                <select id="assign-to" required></select>
+                <input type="text" id="new-task" placeholder="New Task" required />
+                <button type="button" id="assignTaskBtn">Assign Task</button>
+              </form>
+            </div>
           </div>
-
-          <h2>Assigned Tasks</h2>
-          <div id="assigned-tasks"></div>
+      
+          <div class="admin-section">
+            <h2>Assigned Tasks</h2>
+            <div id="assigned-tasks"></div>
+          </div>
         </div>
       </div>
+      
 
       <div id="employee-dashboard" class="dashboard page">
         <h1>Employee Dashboard</h1>
         <button id="logout">Logout</button>
-        <div id="employee-content">
+        <div id="employee-content" class="dashboard-content">
           <h2>Task List</h2>
           <div id="tasklist"></div>
         </div>
       </div>
+      
     </div>
 
     <script>
