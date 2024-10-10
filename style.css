@@ -228,8 +228,8 @@ body {
     }
 
     .team-leader {
-        color: gold;
-        font-weight: bold;
+      color: gold;
+      font-weight: bold;
     }
 
     .team-card {
@@ -363,24 +363,35 @@ body {
         }
       }
 
-      .event-list {
-        width: 100%;
-        margin-top: 20px;
+      #event-list {
         border-collapse: collapse;
-
-        th {
-          background-color: #798645;
-          color: white;
-          padding: 10px;
-        }
-
-        td {
-          padding: 10px;
-          border-bottom: 1px solid #798645;
-        }
+        width: 100%;
       }
 
-      .leaves {
+      #event-list th,
+      #event-list td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      #event-list th {
+        background-color: #f0f0f0;
+      }
+
+      #event-list tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      #event-list td:hover {
+        background-color: #ccc;
+      }
+
+      #event-list td[colspan="4"] {
+        background-color: #fff;
+      }
+
+      #leaves {
         padding: 20px;
         background-color: #798645;
         color: white;
@@ -504,4 +515,135 @@ footer {
       font-size: 0.75rem;
     }
   }
+}
+
+/* Employee Dashboard Styles */
+#employee-dashboard {
+  padding: 20px 40px;
+  background-color: #f4f4f4;
+}
+
+#employee-dashboard #employee-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+#employee-dashboard #employee-profile .left {
+  display: flex;
+  align-items: center;
+}
+
+#employee-dashboard #employee-profile .left img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+#employee-dashboard #employee-profile .left .welcome-text p {
+  margin: 0;
+  font-weight: bold;
+}
+
+#employee-dashboard #employee-profile .left .welcome-text h2 {
+  margin: 0;
+}
+
+#employee-dashboard #employee-profile .right button {
+  background-color: #798645;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  transition: background-color 0.25s;
+}
+
+#employee-dashboard #employee-profile .right button:hover {
+  background-color: #284b26;
+}
+
+#employee-dashboard #employee-tasks-container,
+#employee-dashboard #employee-leaves-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#employee-dashboard h2 {
+  color: #284b26;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+#employee-dashboard h3 {
+  color: #284b26;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+#employee-dashboard .task-card,
+#employee-dashboard .leave-card {
+  border: 1px solid #798645;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+#employee-dashboard .task-card h4,
+#employee-dashboard .leave-card h4 {
+  margin-bottom: 10px;
+}
+
+#employee-dashboard .task-status {
+  font-weight: bold;
+}
+
+#employee-dashboard .task-status.pending {
+  color: orange;
+}
+
+#employee-dashboard .task-status.in-progress {
+  color: blue;
+}
+
+#employee-dashboard .task-status.completed {
+  color: green;
+}
+
+#employee-dashboard form {
+  margin-top: 20px;
+}
+
+#employee-dashboard .btn-success,
+#employee-dashboard .btn-warning {
+  transition: background-color 0.25s;
+}
+
+#employee-dashboard .btn-success:hover {
+  background-color: #2e7d32;
+}
+
+#employee-dashboard .btn-warning:hover {
+  background-color: #c62828;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  #employee-dashboard #employee-profile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #employee-dashboard #employee-profile .right {
+    margin-top: 15px;
+  }
+}
+
+#admin-dashboard .mt-5 {
+  margin-bottom: 20px;
 }

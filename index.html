@@ -28,6 +28,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
   </head>
   <body>
     <header>
@@ -36,7 +38,7 @@
           <a class="navbar-brand" href="#">
             <img
               src="assets/logo-color.png"
-              alt=""
+              alt="TeamSync Logo"
               width="150"
               class="d-inline-block align-text-top"
             />
@@ -63,12 +65,21 @@
       </nav>
     </header>
 
+    <!-- Login Page -->
     <div id="login-page">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
             <img src="assets/logo-color.png" alt="Logo" width="200px" />
-                <form>
+            <form id="login-form">
+              <div class="mb-3">
+                <label for="role" class="form-label">Login As</label>
+                <select class="form-select" id="role" name="role" required>
+                  <option value="">Select Role</option>
+                  <option value="manager">Manager</option>
+                  <option value="employee">Employee</option>
+                </select>
+              </div>
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input
@@ -89,7 +100,9 @@
                   required
                 />
               </div>
-              <button type="submit" class="btn btn-primary" id="login-submit">Login</button>
+              <button type="submit" class="btn btn-primary" id="login-submit">
+                Login
+              </button>
             </form>
           </div>
           <div class="col-md-6 right-img">
@@ -103,172 +116,107 @@
       </div>
     </div>
 
+    <!-- Landing Page -->
     <div id="landing-page">
-        <div class="container">
-            <div class="row">
-            <div class="col-md-6">
-                <img src="assets/logo-color.png" alt="Logo" width="200px">
-                <p>
-                TeamSync is a platform that helps you manage your team and
-                projects. It is a simple and easy to use platform that helps you
-                manage your team and projects.
-                </p>
-                <div id="login-btns" class="row">
-                    <a href="#" class="btn btn-primary login-btn">Login</a>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="assets/logo-color.png" alt="Logo" width="200px" />
+            <p>
+              TeamSync is a platform that helps you manage your team and
+              projects. It is a simple and easy to use platform that helps you
+              manage your team and projects.
+            </p>
+            <div id="login-btns" class="row">
+              <a href="#" class="btn btn-primary login-btn">Login</a>
             </div>
-            <div class="col-md-6">
-                <img src="images/landing-page.jpg" alt="Landing Page Image" class="landing-page-img"/>
-            </div>
-            </div>
+          </div>
+          <div class="col-md-6">
+            <img
+              src="images/landing-page.jpg"
+              alt="Landing Page Image"
+              class="landing-page-img"
+            />
+          </div>
         </div>
-        <div class="container" id="features-container">
-            <h2>Features</h2>
-            <div class="row">
-            <div class="col-md-4">
-                <div class="feature">
-                <img src="images/feature-1.avif" alt="Feature 1" width="100px">
-                <h3>Task Management</h3>
-                <p>
-                    Manage your tasks and projects with ease. Assign tasks to
-                    your team members and track their progress.
-                </p>
-                </div>
+      </div>
+      <div class="container" id="features-container">
+        <h2>Features</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="feature">
+              <img src="images/feature-1.avif" alt="Task Management" />
+              <h3>Task Management</h3>
+              <p>
+                Manage your tasks and projects with ease. Assign tasks to your
+                team members and track their progress.
+              </p>
             </div>
-            <div class="col-md-4">
-                <div class="feature">
-                <img src="images/feature-2.jpg" alt="Feature 2" width="100px">
-                <h3>Team Management</h3>
-                <p>
-                    Manage your team members and their roles. Add new team
-                    members and assign them to projects.
-                </p>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature">
+              <img src="images/feature-2.jpg" alt="Team Management" />
+              <h3>Team Management</h3>
+              <p>
+                Manage your team members and their roles. Add new team members
+                and assign them to projects.
+              </p>
             </div>
-            <div class="col-md-4">
-                <div class="feature">
-                <img src="images/feature-3.png" alt="Feature 3" width="100px">
-                <h3>Leave Management</h3>
-                <p>
-                    Manage your team members' leaves and track their leave
-                    balance. Approve or reject leave requests.
-                </p>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature">
+              <img src="images/feature-3.png" alt="Leave Management" />
+              <h3>Leave Management</h3>
+              <p>
+                Manage your team members' leaves and track their leave balance.
+                Approve or reject leave requests.
+              </p>
             </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
 
+    <!-- Admin Dashboard -->
     <div id="admin-dashboard">
-      <div id="admin-profile">
-      </div>
+      <div id="admin-profile"></div>
       <div id="teams-container">
         <div id="team-list">
-            <!-- 
-                <div class="team-card">
-                  <h3 class="team-name">UI/UX Team</h3>
-                  <p class="team-members">Members: 5</p>
-                  <hr />
-                  <ul>
-                    <li class="team-member team-leader">Lila Monroe</li>
-                    <li class="team-member">Ethan Caldwell</li>
-                    <li class="team-member">Ava Sinclair</li>
-                    <li class="team-member">Jasper Quinn</li>
-                    <li class="team-member">Mila Harper</li>
-                  </ul>
-                </div>
-                <div class="team-card">
-                  <h3 class="team-name">Testing Team</h3>
-                  <p class="team-members">Members: 4</p>
-                  <hr />
-                  <ul>
-                    <li class="team-member team-leader">Leo Bennett</li>
-                    <li class="team-member">Clara Rose</li>
-                    <li class="team-member">Silas Grey</li>
-                    <li class="team-member">Zoe Hart</li>
-                  </ul>
-                </div>
-                <div class="team-card">
-                  <h3 class="team-name">Technical Team</h3>
-                  <p class="team-members">Members: 5</p>
-                  <hr />
-                  <ul>
-                    <li class="team-member team-leader">Nora James</li>
-                    <li class="team-member">Asher Knight</li>
-                    <li class="team-member">Isla Morgan</li>
-                    <li class="team-member">Rowan Wells</li>
-                    <li class="team-member">Chloe Ellis</li>
-                  </ul>
-                </div>
-                <div class="team-card">
-                  <h3 class="team-name">Logistics Team</h3>
-                  <p class="team-members">Members: 3</p>
-                  <hr />
-                  <ul>
-                    <li class="team-member team-leader">Finn Parker</li>
-                    <li class="team-member">Stella Brooks</li>
-                    <li class="team-member">Theo West</li>
-                  </ul>
-                </div>
-             -->
-            </div>
+          <!-- Team Cards will be injected here -->
+        </div>
       </div>
 
       <div id="performace-container">
         <h2>TEAM PERFORMANCE</h2>
-        <select name="leader-select" id="leader-select">
-          <option value="none">Select Leader</option>
-          <option value="leader-1">
-            <tr>
-                <td>Team 1</td>
-                <td>UI/UX</td>
-                <td>Lila Monroe</td>
-            </tr>
-          </option>
-          <option value="leader-2">
-            <tr>
-                <td>Team 2</td>
-                <td>Testing</td>
-                <td>Leo Bennett</td>
-            </tr>
-          </option>
-          <option value="leader-3">
-            <tr>
-                <td>Team 3</td>
-                <td>Technical</td>
-                <td>Nora James</td>
-            </tr>
-          </option>
-          <option value="leader-4">
-            <tr>
-                <td>Team 4</td>
-                <td>Logistics</td>
-                <td>Finn Parker</td>
-            </tr>
-          </option>
+        <select name="leader-select" id="leader-select" class="form-select">
+          <option value="">Select Leader</option>
+          <option value="Ava Smith">Ava Smith - UI/UX Team</option>
+          <option value="Leo Bennett">Leo Bennett - Testing Team</option>
+          <option value="Nora James">Nora James - Technical Team</option>
+          <option value="Finn Parker">Finn Parker - Logistics Team</option>
         </select>
-        <div class="leader-performance">
+        <div class="leader-performance" style="display: none">
           <div class="leader-card">
             <div class="leader-profile">
               <img src="https://placehold.co/100" alt="Leader Avatar" />
-              <h3>Leader 1</h3>
+              <h3>Leader Name</h3>
             </div>
             <div class="leader-graph">
-              <img src="https://placehold.co/600x200" alt="Leader Graph" />
+              <canvas id="team-performance-chart"></canvas>
             </div>
             <div class="task-progress">
               <table>
                 <tr>
-                  <td>Task Assigned</td>
-                  <td>80%</td>
+                  <th>Task Assigned</th>
+                  <td>0</td>
                 </tr>
                 <tr>
-                  <td>Task Completed</td>
-                  <td>60%</td>
+                  <th>Task Completed</th>
+                  <td>0</td>
                 </tr>
                 <tr>
-                  <td>Task Ongoing</td>
-                  <td>40%</td>
+                  <th>Task Ongoing</th>
+                  <td>0</td>
                 </tr>
               </table>
             </div>
@@ -277,103 +225,69 @@
           <div class="leader-calendar">
             <div class="calendar-header">
               <h3>Calendar</h3>
-              <button class="btn btn-primary">Add Event</button>
             </div>
             <div class="calendar-body">
               <div class="events">
-                <table class="event-list">
-                  <tr>
-                    <th>Date</th>
-                    <th>Event</th>
-                  </tr>
-                  <tr>
-                    <td>01/01/2022</td>
-                    <td>Meeting</td>
-                  </tr>
-                  <tr>
-                    <td>01/01/2022</td>
-                    <td>Meeting</td>
-                  </tr>
-                  <tr>
-                    <td>01/01/2022</td>
-                    <td>Meeting</td>
-                  </tr>
-                  <tr>
-                    <td>01/01/2022</td>
-                    <td>Meeting</td>
-                  </tr>
+                <table id="event-list">
+                  <thead>
+                    <tr>
+                      <th>Sun</th>
+                      <th>Mon</th>
+                      <th>Tue</th>
+                      <th>Wed</th>
+                      <th>Thu</th>
+                      <th>Fri</th>
+                      <th>Sat</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>3</td>
+                      <td>4</td>
+                      <td>5</td>
+                      <td>6</td>
+                      <td>7</td>
+                    </tr>
+                    <tr>
+                      <td>8</td>
+                      <td>9</td>
+                      <td>10</td>
+                      <td>11</td>
+                      <td>12</td>
+                      <td>13</td>
+                      <td>14</td>
+                    </tr>
+                    <tr>
+                      <td>15</td>
+                      <td>16</td>
+                      <td>17</td>
+                      <td>18</td>
+                      <td>19</td>
+                      <td>20</td>
+                      <td>21</td>
+                    </tr>
+                    <tr>
+                      <td>22</td>
+                      <td>23</td>
+                      <td>24</td>
+                      <td>25</td>
+                      <td>26</td>
+                      <td>27</td>
+                      <td>28</td>
+                    </tr>
+                    <tr>
+                      <td>29</td>
+                      <td>30</td>
+                      <td>31</td>
+                      <td colspan="4"></td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
-              <div class="leaves">
-                <div class="leave-card">
-                  <div class="header">
-                    <p>Sick Leaves: 4</p>
-                    <a href="">Show</a>
-                  </div>
-                  <table class="sick-leave-list leave-list">
-                    <tr>
-                      <th>Date</th>
-                      <th>Name</th>
-                      <th>Reason</th>
-                    </tr>
-                    <tr>
-                      <td>01/01/2022</td>
-                      <td></td>
-                      <td>Headache</td>
-                    </tr>
-                    <tr>
-                      <td>01/01/2022</td>
-                      <td></td>
-                      <td>Headache</td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="leave-card">
-                  <div class="header">
-                    <p>Paid Leaves: 4</p>
-                    <a href="">Show</a>
-                  </div>
-                  <table class="paid-leave-list leave-list">
-                    <tr>
-                      <th>Date</th>
-                      <th>Name</th>
-                      <th>Reason</th>
-                    </tr>
-                    <tr>
-                      <td>01/01/2022</td>
-                      <td></td>
-                      <td>Headache</td>
-                    </tr>
-                    <tr>
-                      <td>01/01/2022</td>
-                      <td></td>
-                      <td>Headache</td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="leave-card">
-                  <div class="header">
-                    <p>Non-Paid Leaves: 4</p>
-                    <a href="">Show</a>
-                  </div>
-                  <table class="non-paid-leave-list leave-list">
-                    <tr>
-                      <th>Date</th>
-                      <th>Name</th>
-                      <th>Reason</th>
-                    </tr>
-                    <tr>
-                      <td>01/01/2022</td>
-                      <td></td>
-                      <td>Headache</td>
-                    </tr>
-                    <tr>
-                      <td>01/01/2022</td>
-                      <td></td>
-                      <td>Headache</td>
-                    </tr>
-                  </table>
-                </div>
+              <div id="leaves">
+                <!-- Leave Cards will be injected here -->
               </div>
             </div>
           </div>
@@ -381,6 +295,105 @@
       </div>
     </div>
 
+    <!-- Employee Dashboard -->
+    <div id="employee-dashboard" style="display: none">
+      <div id="employee-profile"></div>
+      <div id="employee-tasks-container" class="container">
+        <h2>Your Tasks</h2>
+        <div id="tasks-list" class="row">
+          <!-- Employee tasks will be injected here -->
+        </div>
+        <h3>Assign New Task</h3>
+        <form id="assign-task-form">
+          <div class="mb-3">
+            <label for="task-title" class="form-label">Task Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="task-title"
+              name="task-title"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="task-desc" class="form-label">Task Description</label>
+            <textarea
+              class="form-control"
+              id="task-desc"
+              name="task-desc"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="task-due-date" class="form-label">Due Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="task-due-date"
+              name="task-due-date"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-success" id="assign-task-submit">
+            Assign Task
+          </button>
+        </form>
+      </div>
+
+      <div id="employee-leaves-container" class="container">
+        <h2>Your Leaves</h2>
+        <div id="leaves-list" class="row">
+          <!-- Employee leaves will be injected here -->
+        </div>
+        <h3>Request New Leave</h3>
+        <form id="request-leave-form">
+          <div class="mb-3">
+            <label for="leave-type" class="form-label">Leave Type</label>
+            <select
+              class="form-select"
+              id="leave-type"
+              name="leave-type"
+              required
+            >
+              <option value="">Select Type</option>
+              <option value="sick">Sick Leave</option>
+              <option value="paid">Paid Leave</option>
+              <option value="non-paid">Non-Paid Leave</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="leave-date" class="form-label">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="leave-date"
+              name="leave-date"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="leave-reason" class="form-label">Reason</label>
+            <textarea
+              class="form-control"
+              id="leave-reason"
+              name="leave-reason"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-warning"
+            id="request-leave-submit"
+          >
+            Request Leave
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
       <div class="container">
         <div class="row">
@@ -409,7 +422,7 @@
             </ul>
           </div>
           <div class="col-md-4">
-            <h3>Social links</h3>
+            <h3>Social Links</h3>
             <ul class="social-media">
               <li>
                 <a href="#">
