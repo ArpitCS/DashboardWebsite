@@ -1,0 +1,258 @@
+{
+    "managers": [
+        {
+            "managerName": "John Doe",
+            "managerUsername": "JohnDoe",
+            "managerPassword": "john123",
+            "teams": [
+                {
+                    "teamName": "UI/UX Team",
+                    "teamStrength": 5,
+                    "leader": "Ava Smith",
+                    "members": [
+                        {
+                            "name": "Liam Johnson"
+                        },
+                        {
+                            "name": "Emma Brown"
+                        },
+                        {
+                            "name": "Olivia Davis"
+                        },
+                        {
+                            "name": "Noah Wilson"
+                        }
+                    ],
+                    "leaderPerformace": [76, 89, 92, 85, 78],
+                    "taskAssigned": 12,
+                    "taskCompleted": 10,
+                    "taskOngoing": 2,
+                    "events": [
+                        {
+                            "eventName": "UI/UX Workshop",
+                            "eventDate": "2021-09-15"
+                        },
+                        {
+                            "eventName": "UI/UX Conference",
+                            "eventDate": "2021-09-30"
+                        }
+                    ],
+                    "sickLeaves": [
+                        {
+                            "name": "Liam Johnson",
+                            "date": "2021-09-01",
+                            "reason": "Fever"
+                        },
+                        {
+                            "name": "Olivia Davis",
+                            "date": "2021-09-05",
+                            "reason": "Cold"
+                        }
+                    ],
+                    "paidLeaves": [
+                        {
+                            "name": "Emma Brown",
+                            "date": "2021-09-10",
+                            "reason": "Personal"
+                        },
+                        {
+                            "name": "Noah Wilson",
+                            "date": "2021-09-20",
+                            "reason": "Family Function"
+                        }
+                    ],
+                    "nonPaidLeaves": [
+                        {
+                            "name": "Liam Johnson",
+                            "date": "2021-09-25",
+                            "reason": "Personal"
+                        },
+                        {
+                            "name": "Olivia Davis",
+                            "date": "2021-09-30",
+                            "reason": "Family Function"
+                        }
+                    ]
+                },
+                {
+                    "teamName": "Testing Team",
+                    "teamStrength": 4,
+                    "leader": "Leo Bennett",
+                    "members": [
+                        {
+                            "name": "Clara Rose"
+                        },
+                        {
+                            "name": "Silas Grey"
+                        },
+                        {
+                            "name": "Zoe Hart"
+                        }
+                    ],
+                    "leaderPerformace": [80, 85, 90, 88, 82],
+                    "taskAssigned": 10,
+                    "taskCompleted": 8,
+                    "taskOngoing": 2,
+                    "events": [
+                        {
+                            "eventName": "Testing Workshop",
+                            "eventDate": "2021-09-10"
+                        },
+                        {
+                            "eventName": "Testing Conference",
+                            "eventDate": "2021-09-25"
+                        }
+                    ],
+                    "sickLeaves": [
+                        {
+                            "name": "Clara Rose",
+                            "date": "2021-09-02",
+                            "reason": "Flu"
+                        },
+                        {
+                            "name": "Silas Grey",
+                            "date": "2021-09-06",
+                            "reason": "Headache"
+                        }
+                    ],
+                    "paidLeaves": [
+                        {
+                            "name": "Zoe Hart",
+                            "date": "2021-09-12",
+                            "reason": "Personal"
+                        }
+                    ],
+                    "nonPaidLeaves": [
+                        {
+                            "name": "Clara Rose",
+                            "date": "2021-09-28",
+                            "reason": "Personal"
+                        }
+                    ]
+                },
+                {
+                    "teamName": "Technical Team",
+                    "teamStrength": 5,
+                    "leader": "Nora James",
+                    "members": [
+                        {
+                            "name": "Asher Knight"
+                        },
+                        {
+                            "name": "Isla Morgan"
+                        },
+                        {
+                            "name": "Rowan Wells"
+                        },
+                        {
+                            "name": "Chloe Ellis"
+                        }
+                    ],
+                    "leaderPerformace": [85, 90, 88, 92, 87],
+                    "taskAssigned": 15,
+                    "taskCompleted": 13,
+                    "taskOngoing": 2,
+                    "events": [
+                        {
+                            "eventName": "Tech Workshop",
+                            "eventDate": "2021-09-05"
+                        },
+                        {
+                            "eventName": "Tech Conference",
+                            "eventDate": "2021-09-20"
+                        }
+                    ],
+                    "sickLeaves": [
+                        {
+                            "name": "Asher Knight",
+                            "date": "2021-09-03",
+                            "reason": "Fever"
+                        },
+                        {
+                            "name": "Isla Morgan",
+                            "date": "2021-09-07",
+                            "reason": "Cold"
+                        }
+                    ],
+                    "paidLeaves": [
+                        {
+                            "name": "Rowan Wells",
+                            "date": "2021-09-15",
+                            "reason": "Personal"
+                        },
+                        {
+                            "name": "Chloe Ellis",
+                            "date": "2021-09-18",
+                            "reason": "Family Function"
+                        }
+                    ],
+                    "nonPaidLeaves": [
+                        {
+                            "name": "Asher Knight",
+                            "date": "2021-09-22",
+                            "reason": "Personal"
+                        },
+                        {
+                            "name": "Isla Morgan",
+                            "date": "2021-09-29",
+                            "reason": "Family Function"
+                        }
+                    ]
+                },
+                {
+                    "teamName": "Logistics Team",
+                    "teamStrength": 3,
+                    "leader": "Finn Parker",
+                    "members": [
+                        {
+                            "name": "Stella Brooks"
+                        },
+                        {
+                            "name": "Theo West"
+                        }
+                    ],
+                    "leaderPerformace": [78, 82, 85, 80, 75],
+                    "taskAssigned": 8,
+                    "taskCompleted": 6,
+                    "taskOngoing": 2,
+                    "events": [
+                        {
+                            "eventName": "Logistics Workshop",
+                            "eventDate": "2021-09-08"
+                        },
+                        {
+                            "eventName": "Logistics Conference",
+                            "eventDate": "2021-09-22"
+                        }
+                    ],
+                    "sickLeaves": [
+                        {
+                            "name": "Stella Brooks",
+                            "date": "2021-09-04",
+                            "reason": "Fever"
+                        },
+                        {
+                            "name": "Theo West",
+                            "date": "2021-09-09",
+                            "reason": "Cold"
+                        }
+                    ],
+                    "paidLeaves": [
+                        {
+                            "name": "Stella Brooks",
+                            "date": "2021-09-14",
+                            "reason": "Personal"
+                        }
+                    ],
+                    "nonPaidLeaves": [
+                        {
+                            "name": "Theo West",
+                            "date": "2021-09-26",
+                            "reason": "Personal"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

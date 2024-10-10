@@ -3,273 +3,438 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TechCorp Solutions</title>
+    <title>TeamSync</title>
+
     <link rel="stylesheet" href="style.css" />
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <div id="app">
-      <div id="login-page" class="page">
-        <img src="logo.png" alt="TechCorp Solutions Logo" />
-        <h1>Login to TechCorp Solutions</h1>
-        <form id="login-form">
-          <input type="text" id="username" placeholder="Username" required />
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-          />
-          <button type="submit">Login</button>
-          <p id="error-message"></p>
-        </form>
-        <p>
-          <strong>Default Admin Credentials:</strong> <br />
-          Username: admin <br />
-          Password: adminpass
-        </p>
-        <p>
-          <strong>Default Employee Credentials:</strong> <br />
-          Username: employee <br />
-          Password: employeepass
-        </p>
-      </div>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="assets/logo-color.png"
+              alt=""
+              width="150"
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link login-btn" href="#">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-      <div id="admin-dashboard" class="dashboard page">
-        <h1>Admin Dashboard</h1>
-        <button id="logout">Logout</button>
-        <div id="admin-content" class="dashboard-content">
-          <div class="admin-section">
-            <h2>Manage Users</h2>
-            <div id="userlist"></div>
-            <div id="adduser">
-              <form id="adduser-form">
-                <input type="text" id="newusername" placeholder="Username" required />
-                <input type="password" id="newpassword" placeholder="Password" required />
-                <select id="newrole" required>
-                  <option value="employee">Employee</option>
-                  <option value="admin">Admin</option>
-                </select>
-                <button type="button" id="addBtn">Add User</button>
-              </form>
-            </div>
+    <div id="login-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="assets/logo-color.png" alt="Logo" width="200px" />
+                <form>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary" id="login-submit">Login</button>
+            </form>
           </div>
-      
-          <div class="admin-section">
-            <h2>Assign Tasks</h2>
-            <div id="assign-task">
-              <form id="assign-task-form">
-                <select id="assign-to" required></select>
-                <input type="text" id="new-task" placeholder="New Task" required />
-                <button type="button" id="assignTaskBtn">Assign Task</button>
-              </form>
-            </div>
-          </div>
-      
-          <div class="admin-section">
-            <h2>Assigned Tasks</h2>
-            <div id="assigned-tasks"></div>
+          <div class="col-md-6 right-img">
+            <img
+              src="images/login-page.avif"
+              alt="Login Page Image"
+              class="login-page-img"
+            />
           </div>
         </div>
       </div>
-      
-
-      <div id="employee-dashboard" class="dashboard page">
-        <h1>Employee Dashboard</h1>
-        <button id="logout">Logout</button>
-        <div id="employee-content" class="dashboard-content">
-          <h2>Task List</h2>
-          <div id="tasklist"></div>
-        </div>
-      </div>
-      
     </div>
 
-    <script>
-      const localDB = {
-        getUsers() {
-          return (
-            JSON.parse(localStorage.getItem("users")) || [
-              { username: "admin", password: "adminpass", role: "admin" },
-              {
-                username: "employee",
-                password: "employeepass",
-                role: "employee",
-              },
-            ]
-          );
-        },
-        setUsers(users) {
-          localStorage.setItem("users", JSON.stringify(users));
-        },
-        getTasks() {
-          return JSON.parse(localStorage.getItem("tasks")) || [];
-        },
-        setTasks(tasks) {
-          localStorage.setItem("tasks", JSON.stringify(tasks));
-        },
-      };
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const loginPage = document.getElementById("login-page");
-        const adminDashboard = document.getElementById("admin-dashboard");
-        const employeeDashboard = document.getElementById("employee-dashboard");
-
-        adminDashboard.style.display = "none";
-        employeeDashboard.style.display = "none";
-
-        const loginForm = document.getElementById("login-form");
-        const errorMessage = document.getElementById("error-message");
-
-        function displayDashboard(user) {
-          loginPage.style.display = "none";
-          if (user.role === "admin") {
-            adminDashboard.style.display = "block";
-            loadUserList();
-            loadAssignTaskOptions();
-            loadAssignedTasks();
-          } else {
-            employeeDashboard.style.display = "block";
-            loadTaskList(user.username);
-          }
-        }
-
-        loginForm.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
-
-          const users = localDB.getUsers();
-          const user = users.find(
-            (u) => u.username === username && u.password === password
-          );
-
-          if (user) {
-            localStorage.setItem("user", JSON.stringify(user));
-            displayDashboard(user);
-          } else {
-            errorMessage.textContent = "Invalid username or password";
-          }
-        });
-
-        document.querySelectorAll("#logout").forEach((button) => {
-          button.addEventListener("click", () => {
-            localStorage.removeItem("user");
-            loginPage.style.display = "block";
-            adminDashboard.style.display = "none";
-            employeeDashboard.style.display = "none";
-          });
-        });
-
-        function loadUserList() {
-          const userlist = document.getElementById("userlist");
-          const users = localDB.getUsers();
-          userlist.innerHTML = "";
-          users.forEach((user) => {
-            userlist.innerHTML += `
-            <div class="user-card">
-              <img src="profile-placeholder.jpg" alt="${user.username}" />
-              <div>${user.username} - ${user.role}</div>
+    <div id="landing-page">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-6">
+                <img src="assets/logo-color.png" alt="Logo" width="200px">
+                <p>
+                TeamSync is a platform that helps you manage your team and
+                projects. It is a simple and easy to use platform that helps you
+                manage your team and projects.
+                </p>
+                <div id="login-btns" class="row">
+                    <a href="#" class="btn btn-primary login-btn">Login</a>
+                </div>
             </div>
-          `;
-          });
-        }
+            <div class="col-md-6">
+                <img src="images/landing-page.jpg" alt="Landing Page Image" class="landing-page-img"/>
+            </div>
+            </div>
+        </div>
+        <div class="container" id="features-container">
+            <h2>Features</h2>
+            <div class="row">
+            <div class="col-md-4">
+                <div class="feature">
+                <img src="images/feature-1.avif" alt="Feature 1" width="100px">
+                <h3>Task Management</h3>
+                <p>
+                    Manage your tasks and projects with ease. Assign tasks to
+                    your team members and track their progress.
+                </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature">
+                <img src="images/feature-2.jpg" alt="Feature 2" width="100px">
+                <h3>Team Management</h3>
+                <p>
+                    Manage your team members and their roles. Add new team
+                    members and assign them to projects.
+                </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature">
+                <img src="images/feature-3.png" alt="Feature 3" width="100px">
+                <h3>Leave Management</h3>
+                <p>
+                    Manage your team members' leaves and track their leave
+                    balance. Approve or reject leave requests.
+                </p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
 
-        const addBtn = document.getElementById("addBtn");
-        addBtn.addEventListener("click", () => {
-          const newusername = document.getElementById("newusername").value;
-          const newpassword = document.getElementById("newpassword").value;
-          const newrole = document.getElementById("newrole").value;
+    <div id="admin-dashboard">
+      <div id="admin-profile">
+      </div>
+      <div id="teams-container">
+        <div id="team-list">
+            <!-- 
+                <div class="team-card">
+                  <h3 class="team-name">UI/UX Team</h3>
+                  <p class="team-members">Members: 5</p>
+                  <hr />
+                  <ul>
+                    <li class="team-member team-leader">Lila Monroe</li>
+                    <li class="team-member">Ethan Caldwell</li>
+                    <li class="team-member">Ava Sinclair</li>
+                    <li class="team-member">Jasper Quinn</li>
+                    <li class="team-member">Mila Harper</li>
+                  </ul>
+                </div>
+                <div class="team-card">
+                  <h3 class="team-name">Testing Team</h3>
+                  <p class="team-members">Members: 4</p>
+                  <hr />
+                  <ul>
+                    <li class="team-member team-leader">Leo Bennett</li>
+                    <li class="team-member">Clara Rose</li>
+                    <li class="team-member">Silas Grey</li>
+                    <li class="team-member">Zoe Hart</li>
+                  </ul>
+                </div>
+                <div class="team-card">
+                  <h3 class="team-name">Technical Team</h3>
+                  <p class="team-members">Members: 5</p>
+                  <hr />
+                  <ul>
+                    <li class="team-member team-leader">Nora James</li>
+                    <li class="team-member">Asher Knight</li>
+                    <li class="team-member">Isla Morgan</li>
+                    <li class="team-member">Rowan Wells</li>
+                    <li class="team-member">Chloe Ellis</li>
+                  </ul>
+                </div>
+                <div class="team-card">
+                  <h3 class="team-name">Logistics Team</h3>
+                  <p class="team-members">Members: 3</p>
+                  <hr />
+                  <ul>
+                    <li class="team-member team-leader">Finn Parker</li>
+                    <li class="team-member">Stella Brooks</li>
+                    <li class="team-member">Theo West</li>
+                  </ul>
+                </div>
+             -->
+            </div>
+      </div>
 
-          if (newusername && newpassword) {
-            const users = localDB.getUsers();
-            users.push({
-              username: newusername,
-              password: newpassword,
-              role: newrole,
-            });
-            localDB.setUsers(users);
+      <div id="performace-container">
+        <h2>TEAM PERFORMANCE</h2>
+        <select name="leader-select" id="leader-select">
+          <option value="none">Select Leader</option>
+          <option value="leader-1">
+            <tr>
+                <td>Team 1</td>
+                <td>UI/UX</td>
+                <td>Lila Monroe</td>
+            </tr>
+          </option>
+          <option value="leader-2">
+            <tr>
+                <td>Team 2</td>
+                <td>Testing</td>
+                <td>Leo Bennett</td>
+            </tr>
+          </option>
+          <option value="leader-3">
+            <tr>
+                <td>Team 3</td>
+                <td>Technical</td>
+                <td>Nora James</td>
+            </tr>
+          </option>
+          <option value="leader-4">
+            <tr>
+                <td>Team 4</td>
+                <td>Logistics</td>
+                <td>Finn Parker</td>
+            </tr>
+          </option>
+        </select>
+        <div class="leader-performance">
+          <div class="leader-card">
+            <div class="leader-profile">
+              <img src="https://placehold.co/100" alt="Leader Avatar" />
+              <h3>Leader 1</h3>
+            </div>
+            <div class="leader-graph">
+              <img src="https://placehold.co/600x200" alt="Leader Graph" />
+            </div>
+            <div class="task-progress">
+              <table>
+                <tr>
+                  <td>Task Assigned</td>
+                  <td>80%</td>
+                </tr>
+                <tr>
+                  <td>Task Completed</td>
+                  <td>60%</td>
+                </tr>
+                <tr>
+                  <td>Task Ongoing</td>
+                  <td>40%</td>
+                </tr>
+              </table>
+            </div>
+          </div>
 
-            loadUserList();
-            loadAssignTaskOptions();
-          }
-        });
-
-        const assignTaskBtn = document.getElementById("assignTaskBtn");
-        assignTaskBtn.addEventListener("click", () => {
-          const assignedTo = document.getElementById("assign-to").value;
-          const newTask = document.getElementById("new-task").value;
-
-          if (assignedTo && newTask) {
-            const tasks = localDB.getTasks();
-            tasks.push({ task: newTask, assignedTo, completed: false });
-            localDB.setTasks(tasks);
-
-            loadAssignedTasks();
-            document.getElementById("new-task").value = "";
-          }
-        });
-
-        function loadAssignTaskOptions() {
-          const assignTo = document.getElementById("assign-to");
-          const users = localDB.getUsers().filter((u) => u.role === "employee");
-          assignTo.innerHTML = users
-            .map(
-              (user) =>
-                `<option value="${user.username}">${user.username}</option>`
-            )
-            .join("");
-        }
-
-        function loadAssignedTasks() {
-          const assignedTasks = document.getElementById("assigned-tasks");
-          const tasks = localDB.getTasks();
-          assignedTasks.innerHTML = "";
-          tasks.forEach((task, index) => {
-            if (!task.completed) {
-              assignedTasks.innerHTML += `
-              <div>
-                ${task.task} (Assigned to: ${task.assignedTo})
-                <button onclick="removeTask(${index})">Remove</button>
+          <div class="leader-calendar">
+            <div class="calendar-header">
+              <h3>Calendar</h3>
+              <button class="btn btn-primary">Add Event</button>
+            </div>
+            <div class="calendar-body">
+              <div class="events">
+                <table class="event-list">
+                  <tr>
+                    <th>Date</th>
+                    <th>Event</th>
+                  </tr>
+                  <tr>
+                    <td>01/01/2022</td>
+                    <td>Meeting</td>
+                  </tr>
+                  <tr>
+                    <td>01/01/2022</td>
+                    <td>Meeting</td>
+                  </tr>
+                  <tr>
+                    <td>01/01/2022</td>
+                    <td>Meeting</td>
+                  </tr>
+                  <tr>
+                    <td>01/01/2022</td>
+                    <td>Meeting</td>
+                  </tr>
+                </table>
               </div>
-            `;
-            }
-          });
-        }
-
-        function loadTaskList(username) {
-          const tasklist = document.getElementById("tasklist");
-          const tasks = localDB
-            .getTasks()
-            .filter((task) => task.assignedTo === username && !task.completed);
-          tasklist.innerHTML = "";
-          tasks.forEach((task, index) => {
-            tasklist.innerHTML += `
-            <div>
-              ${task.task}
-              <button onclick="
-                if (confirm('Are you sure you want to complete this task?')) {
-                  completeTask(${index});
-                }
-              ">Complete</button>
+              <div class="leaves">
+                <div class="leave-card">
+                  <div class="header">
+                    <p>Sick Leaves: 4</p>
+                    <a href="">Show</a>
+                  </div>
+                  <table class="sick-leave-list leave-list">
+                    <tr>
+                      <th>Date</th>
+                      <th>Name</th>
+                      <th>Reason</th>
+                    </tr>
+                    <tr>
+                      <td>01/01/2022</td>
+                      <td></td>
+                      <td>Headache</td>
+                    </tr>
+                    <tr>
+                      <td>01/01/2022</td>
+                      <td></td>
+                      <td>Headache</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="leave-card">
+                  <div class="header">
+                    <p>Paid Leaves: 4</p>
+                    <a href="">Show</a>
+                  </div>
+                  <table class="paid-leave-list leave-list">
+                    <tr>
+                      <th>Date</th>
+                      <th>Name</th>
+                      <th>Reason</th>
+                    </tr>
+                    <tr>
+                      <td>01/01/2022</td>
+                      <td></td>
+                      <td>Headache</td>
+                    </tr>
+                    <tr>
+                      <td>01/01/2022</td>
+                      <td></td>
+                      <td>Headache</td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="leave-card">
+                  <div class="header">
+                    <p>Non-Paid Leaves: 4</p>
+                    <a href="">Show</a>
+                  </div>
+                  <table class="non-paid-leave-list leave-list">
+                    <tr>
+                      <th>Date</th>
+                      <th>Name</th>
+                      <th>Reason</th>
+                    </tr>
+                    <tr>
+                      <td>01/01/2022</td>
+                      <td></td>
+                      <td>Headache</td>
+                    </tr>
+                    <tr>
+                      <td>01/01/2022</td>
+                      <td></td>
+                      <td>Headache</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
             </div>
-          `;
-          });
-        }
+          </div>
+        </div>
+      </div>
+    </div>
 
-        window.completeTask = function (index) {
-          const tasks = localDB.getTasks();
-          tasks[index].completed = true;
-          localDB.setTasks(tasks);
-          loadTaskList(JSON.parse(localStorage.getItem("user")).username);
-        };
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <img
+              src="assets/logo-color.png"
+              alt="Logo"
+              width="100px"
+              class="footer-logo"
+            />
+            <p>
+              TeamSync is a platform that helps you manage your team and
+              projects. It is a simple and easy to use platform that helps you
+              manage your team and projects.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h3>Quick Links</h3>
+            <ul>
+              <li>
+                <a href="#">Admin Login</a>
+              </li>
+              <li>
+                <a href="#">Employee Login</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h3>Social links</h3>
+            <ul class="social-media">
+              <li>
+                <a href="#">
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa-brands fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-12 copyright-bar">
+            <p>&copy; 2024 TeamSync. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-        window.removeTask = function (index) {
-          const tasks = localDB.getTasks();
-          tasks.splice(index, 1);
-          localDB.setTasks(tasks);
-          loadAssignedTasks();
-        };
-      });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
